@@ -1,5 +1,5 @@
 import torch
-
+import pickle
 
 def _processinput(inp, input_to_float=False):
     if input_to_float:
@@ -22,3 +22,12 @@ def get_features(model, data_loader, use_modal):
         proj_x = [model.fuse.proj[i](x[i]) for i in range(2)]
         features.append(proj_x)
     return features
+
+def read_pickle(file_path):
+    with open(file_path, 'rb') as file:
+        data = pickle.load(file)
+    return data
+
+def write_pickle(data, file_path):
+    with open(file_path, 'wb') as file:
+        pickle.dump(data, file)
